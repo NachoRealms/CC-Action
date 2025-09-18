@@ -11,8 +11,8 @@ public class CloseInventoryActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"player", "p"}, disabledCheck = true)
     private Player player;
 
-    public CloseInventoryActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public CloseInventoryActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

@@ -23,8 +23,8 @@ public class BossBarActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"delay", "d"})
     private int delay;
 
-    public BossBarActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public BossBarActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

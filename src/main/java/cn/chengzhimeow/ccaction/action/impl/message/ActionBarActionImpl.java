@@ -14,8 +14,8 @@ public class ActionBarActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"message", "msg"})
     private Component message;
 
-    public ActionBarActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public ActionBarActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

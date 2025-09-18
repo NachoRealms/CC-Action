@@ -18,8 +18,8 @@ public class PlayerCommandActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"command", "cmd"})
     private String command;
 
-    public PlayerCommandActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public PlayerCommandActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

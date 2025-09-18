@@ -12,8 +12,8 @@ public class BroadcastActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"message", "msg"})
     private Component message;
 
-    public BroadcastActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public BroadcastActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

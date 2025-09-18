@@ -14,8 +14,8 @@ public class MessageActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"message", "msg"})
     private Component message;
 
-    public MessageActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public MessageActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

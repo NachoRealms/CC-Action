@@ -17,8 +17,8 @@ public class PlaySoundActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"pitch", "p"}, required = false)
     private float pitch = 1f;
 
-    public PlaySoundActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public PlaySoundActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

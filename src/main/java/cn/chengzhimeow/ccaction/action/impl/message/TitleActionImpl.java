@@ -25,8 +25,8 @@ public class TitleActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"out"}, required = false)
     private int out = 10;
 
-    public TitleActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public TitleActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override

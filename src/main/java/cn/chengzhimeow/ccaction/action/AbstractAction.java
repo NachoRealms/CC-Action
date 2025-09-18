@@ -12,20 +12,20 @@ import java.util.*;
 
 public abstract class AbstractAction {
     protected final CCAction ccAction;
-    protected final Map<String, Object> prams;
+    protected final Map<String, Object> params;
 
-    public AbstractAction(CCAction ccAction, Map<String, Object> prams) {
+    public AbstractAction(CCAction ccAction, Map<String, Object> params) {
         this.ccAction = ccAction;
 
-        Map<String, Object> finalPrams = new HashMap<>();
-        for (Map.Entry<String, Object> entry : prams.entrySet()) {
+        Map<String, Object> finalParams = new HashMap<>();
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
             Object value = entry.getValue();
 
             List<PreProcessManager> list = ccAction.getPreProcessRegistry().getOrDefault(value.getClass(), new ArrayList<>());
             for (PreProcessManager pp : list) value = pp.handle(this, ccAction);
-            finalPrams.put(entry.getKey(), value);
+            finalParams.put(entry.getKey(), value);
         }
-        this.prams = finalPrams;
+        this.params = finalParams;
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class AbstractAction {
      */
     @SneakyThrows
     public final <T> T getPram(String key, Class<T> type) {
-        Object value = this.prams.get(key);
+        Object value = this.params.get(key);
         if (value == null) return null;
 
         CastManager castManager = this.ccAction.getCastRegistry().get(type);
@@ -61,7 +61,7 @@ public abstract class AbstractAction {
             Class<?> type = field.getType();
             CastManager castManager = this.ccAction.getCastRegistry().get(type);
             for (String key : annotation.keys()) {
-                Object value = this.prams.get(key);
+                Object value = this.params.get(key);
                 if (value == null) continue;
 
                 notFound = false;
@@ -101,7 +101,7 @@ public abstract class AbstractAction {
             Class<?> type = field.getType();
             CastManager castManager = this.ccAction.getCastRegistry().get(type);
             for (String key : annotation.keys()) {
-                Object value = this.prams.get(key);
+                Object value = this.params.get(key);
                 if (value == null) continue;
 
                 v = castManager.cast(value, type);

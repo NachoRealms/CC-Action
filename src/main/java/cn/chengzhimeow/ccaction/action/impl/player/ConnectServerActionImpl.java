@@ -16,8 +16,8 @@ public class ConnectServerActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"server", "s"})
     private String server;
 
-    public ConnectServerActionImpl(CCAction ccAction, Map<String, Object> prams) {
-        super(ccAction, prams);
+    public ConnectServerActionImpl(CCAction ccAction, Map<String, Object> params) {
+        super(ccAction, params);
     }
 
     @Override
