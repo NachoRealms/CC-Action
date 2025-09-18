@@ -12,7 +12,7 @@ import java.util.Map;
 public class BossBarActionImpl extends AbstractAction {
     @ArgumentKey(keys = {"player", "p"}, disabledCheck = true)
     private Player player;
-    @ArgumentKey(keys = {"title", "t"}, required = false)
+    @ArgumentKey(keys = {"title", "t"})
     private Component title;
     @ArgumentKey(keys = {"color", "c"}, required = false)
     private BossBar.Color color = BossBar.Color.YELLOW;
