@@ -67,19 +67,19 @@ public abstract class AbstractAction {
                 notFound = false;
                 try {
                     if (castManager == null) {
-                        errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NO_CAST_IMPLEMENTATION));
+                        errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NO_CAST_IMPLEMENTATION, null));
                         continue;
                     }
 
                     castManager.cast(value, type);
                 } catch (NumberFormatException | IndexOutOfBoundsException | ClassCastException | CastException e) {
-                    errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.CAST_ERROR));
+                    errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.CAST_ERROR, e));
                 }
                 break;
             }
 
             if (notFound)
-                errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NOT_FOUND));
+                errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NOT_FOUND, null));
         }
 
         if (errors.isEmpty()) return;
