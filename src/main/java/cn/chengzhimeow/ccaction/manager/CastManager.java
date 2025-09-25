@@ -25,6 +25,10 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Long) return value;
             else if (value instanceof String s) return Long.parseLong(s);
+            else if (value instanceof Integer v) return v.longValue();
+            else if (value instanceof Short v) return v.longValue();
+            else if (value instanceof Double v) return v.longValue();
+            else if (value instanceof Float v) return v.longValue();
             else throw new CastException(value, type);
         }
     }
@@ -34,6 +38,10 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Integer) return value;
             else if (value instanceof String s) return Integer.parseInt(s);
+            else if (value instanceof Long v) return v.intValue();
+            else if (value instanceof Short v) return v.intValue();
+            else if (value instanceof Double v) return v.intValue();
+            else if (value instanceof Float v) return v.intValue();
             else throw new CastException(value, type);
         }
     }
@@ -43,6 +51,10 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Short) return value;
             else if (value instanceof String s) return Short.parseShort(s);
+            else if (value instanceof Long v) return v.shortValue();
+            else if (value instanceof Integer v) return v.shortValue();
+            else if (value instanceof Double v) return v.shortValue();
+            else if (value instanceof Float v) return v.shortValue();
             else throw new CastException(value, type);
         }
     }
@@ -52,6 +64,10 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Double) return value;
             else if (value instanceof String s) return Double.parseDouble(s);
+            else if (value instanceof Long v) return v.doubleValue();
+            else if (value instanceof Integer v) return v.doubleValue();
+            else if (value instanceof Short v) return v.doubleValue();
+            else if (value instanceof Float v) return v.doubleValue();
             else throw new CastException(value, type);
         }
     }
@@ -61,6 +77,10 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Float) return value;
             else if (value instanceof String s) return Float.parseFloat(s);
+            else if (value instanceof Long v) return v.floatValue();
+            else if (value instanceof Integer v) return v.floatValue();
+            else if (value instanceof Short v) return v.floatValue();
+            else if (value instanceof Double v) return v.floatValue();
             else throw new CastException(value, type);
         }
     }
@@ -79,6 +99,11 @@ public interface CastManager {
         public Object cast(Object value, Class<?> type) throws CastException {
             if (value instanceof Byte) return value;
             else if (value instanceof String s) return Byte.parseByte(s);
+            else if (value instanceof Long v) return v.byteValue();
+            else if (value instanceof Integer v) return v.byteValue();
+            else if (value instanceof Short v) return v.byteValue();
+            else if (value instanceof Double v) return v.byteValue();
+            else if (value instanceof Float v) return v.byteValue();
             else throw new CastException(value, type);
         }
     }
