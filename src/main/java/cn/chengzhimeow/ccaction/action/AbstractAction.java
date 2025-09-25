@@ -56,6 +56,7 @@ public abstract class AbstractAction {
 
             ArgumentKey annotation = field.getAnnotation(ArgumentKey.class);
             if (annotation == null) continue;
+            if (annotation.disabledCheck()) continue;
 
             boolean notFound = true;
             Class<?> type = field.getType();
