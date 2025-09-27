@@ -86,7 +86,7 @@ public abstract class AbstractAction {
                 break;
             }
 
-            if (notFound)
+            if (notFound && annotation.required())
                 errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NOT_FOUND, null));
         }
 
