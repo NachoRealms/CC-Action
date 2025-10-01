@@ -5,6 +5,7 @@ import cn.chengzhimeow.ccaction.exception.ActionIllegalArgumentException;
 import cn.chengzhimeow.ccaction.exception.CastException;
 import cn.chengzhimeow.ccaction.manager.CastManager;
 import cn.chengzhimeow.ccaction.manager.PreProcessManager;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
@@ -12,6 +13,7 @@ import java.util.*;
 
 public abstract class AbstractAction {
     protected final CCAction ccAction;
+    @Getter
     protected final Map<String, Object> params;
 
     public AbstractAction(CCAction ccAction, Map<String, Object> params) {
@@ -35,7 +37,7 @@ public abstract class AbstractAction {
      * @return 参数值
      */
     @SneakyThrows
-    public final <T> T getPram(String key, Class<T> type) {
+    public final <T> T getParam(String key, Class<T> type) {
         Object value = this.params.get(key);
         if (value == null) return null;
 
