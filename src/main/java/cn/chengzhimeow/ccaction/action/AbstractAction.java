@@ -17,15 +17,14 @@ public abstract class AbstractAction {
     public AbstractAction(CCAction ccAction, Map<String, Object> params) {
         this.ccAction = ccAction;
 
-        Map<String, Object> finalParams = new HashMap<>();
+        this.params = params;
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             Object value = entry.getValue();
 
             List<PreProcessManager> list = ccAction.getPreProcessRegistry().getOrDefault(value.getClass(), new ArrayList<>());
             for (PreProcessManager pp : list) value = pp.handle(this, ccAction);
-            finalParams.put(entry.getKey(), value);
+            params.put(entry.getKey(), value);
         }
-        this.params = finalParams;
     }
 
     /**
