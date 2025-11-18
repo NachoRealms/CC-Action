@@ -1,6 +1,7 @@
 package cn.chengzhimeow.ccaction;
 
 import cn.chengzhimeow.ccaction.action.AbstractAction;
+import cn.chengzhimeow.ccaction.action.ActionBuilder;
 import cn.chengzhimeow.ccaction.registry.ActionRegistry;
 import cn.chengzhimeow.ccaction.registry.CastRegistry;
 import cn.chengzhimeow.ccaction.registry.PreProcessRegistry;
@@ -45,11 +46,11 @@ public final class CCAction {
      * @return 操作实例
      */
     @SneakyThrows
-    public AbstractAction getAction(String id, Map<String, Object> map) {
+    public ActionBuilder.Builder getAction(String id, Map<String, Object> map) {
         Constructor<? extends AbstractAction> constructor = this.actionRegistry.get(id);
-        if (constructor == null) {
-            throw new IllegalArgumentException("Cannot find the action with id " + id);
-        }
-        return constructor.newInstance(this, map);
+        if (constructor == null) throw new IllegalArgumentException("Cannot find the action with id " + id);
+        return ActionBuilder.builder(this)
+                .action(constructor)
+                .params(map);
     }
 }

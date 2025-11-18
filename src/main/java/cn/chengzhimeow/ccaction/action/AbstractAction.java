@@ -19,13 +19,13 @@ public abstract class AbstractAction {
     public AbstractAction(CCAction ccAction, Map<String, Object> params) {
         this.ccAction = ccAction;
 
-        this.params = params;
+        this.params = new HashMap<>(params);
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             Object value = entry.getValue();
 
             List<PreProcessManager> list = ccAction.getPreProcessRegistry().getOrDefault(value.getClass(), new ArrayList<>());
-            for (PreProcessManager pp : list) value = pp.handle(this, ccAction);
-            params.put(entry.getKey(), value);
+            for (PreProcessManager pp : list) value = pp.handle(ccAction, this, value);
+            this.params.put(entry.getKey(), value);
         }
     }
 
@@ -41,9 +41,11 @@ public abstract class AbstractAction {
         Object value = this.params.get(key);
         if (value == null) return null;
 
+        if (type.isInstance(value)) return type.cast(value);
+
         CastManager castManager = this.ccAction.getCastRegistry().get(type);
         // noinspection unchecked
-        return (T) castManager.cast(value, type);
+        return (T) castManager.cast(this.ccAction, value, type);
     }
 
     /**
@@ -55,8 +57,9 @@ public abstract class AbstractAction {
         boolean disableCheck = false;
         try {
             CastManager boolCast = this.ccAction.getCastRegistry().get(Boolean.class);
-            disableCheck = (boolean) boolCast.cast(this.params.getOrDefault("disabled_check", false), Boolean.class);
-        } catch (CastException ignored) {}
+            disableCheck = (boolean) boolCast.cast(ccAction, this.params.getOrDefault("disabled_check", false), Boolean.class);
+        } catch (CastException ignored) {
+        }
         if (disableCheck) return;
 
         for (Field field : this.getClass().getDeclaredFields()) {
@@ -72,15 +75,17 @@ public abstract class AbstractAction {
             for (String key : annotation.keys()) {
                 Object value = this.params.get(key);
                 if (value == null) continue;
-
                 notFound = false;
+
+                if (type.isInstance(value)) break;
+
                 try {
                     if (castManager == null) {
                         errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.NO_CAST_IMPLEMENTATION, null));
                         continue;
                     }
 
-                    castManager.cast(value, type);
+                    castManager.cast(ccAction, value, type);
                 } catch (NumberFormatException | IndexOutOfBoundsException | ClassCastException | CastException e) {
                     errors.add(new ActionIllegalArgumentException.ErrorKey(annotation, ActionIllegalArgumentException.ErrorCaused.CAST_ERROR, e));
                 }
@@ -112,8 +117,12 @@ public abstract class AbstractAction {
             for (String key : annotation.keys()) {
                 Object value = this.params.get(key);
                 if (value == null) continue;
+                if (type.isInstance(value)) {
+                    v = value;
+                    break;
+                }
 
-                v = castManager.cast(value, type);
+                v = castManager.cast(ccAction, value, type);
                 break;
             }
 

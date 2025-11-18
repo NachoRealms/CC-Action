@@ -1,5 +1,6 @@
 package cn.chengzhimeow.ccaction.registry;
 
+import cn.chengzhimeow.ccaction.action.ActionBuilder;
 import cn.chengzhimeow.ccaction.manager.CastManager;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
@@ -47,6 +48,7 @@ public final class CastRegistry extends Registry<Class<?>, CastManager> {
         map.put(Player.class, new CastManager.PlayerCastManager());
         map.put(OfflinePlayer.class, new CastManager.OfflinePlayerCastManager());
 
+        map.put(ActionBuilder.Builder.class, new CastManager.ActionBuilderManager());
         return map;
     }
 
