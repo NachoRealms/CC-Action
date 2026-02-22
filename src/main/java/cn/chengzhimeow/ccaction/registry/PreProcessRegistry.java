@@ -27,13 +27,19 @@ public final class PreProcessRegistry extends Registry<Class<?>, List<PreProcess
     }
 
     public void register(Class<?> clazz, PreProcessManager preProcessManager) {
-        List<PreProcessManager> list = super.getOrDefault(clazz, new ArrayList<>());
+        List<PreProcessManager> list = super.get(clazz);
+        if (list == null) list = new ArrayList<>();
+        else list = new ArrayList<>(list);
+
         list.add(preProcessManager);
         super.register(clazz, list);
     }
 
     public void unregister(Class<?> clazz, PreProcessManager preProcessManager) {
-        List<PreProcessManager> list = super.getOrDefault(clazz, new ArrayList<>());
+        List<PreProcessManager> list = super.get(clazz);
+        if (list == null) list = new ArrayList<>();
+        else list = new ArrayList<>(list);
+
         list.remove(preProcessManager);
 
         if (list.isEmpty()) {
